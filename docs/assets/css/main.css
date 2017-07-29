@@ -3866,13 +3866,13 @@
 			-webkit-transition: opacity 0.5s ease, -webkit-transform 1s ease;
 			-ms-transition: opacity 0.5s ease, -ms-transform 1s ease;
 			transition: opacity 0.5s ease, transform 1s ease;
-			-moz-transform: translateX(0);
-			-webkit-transform: translateX(0);
-			-ms-transform: translateX(0);
-			transform: translateX(0);
+			-moz-transform: translateY(0);
+			-webkit-transform: translateY(0);
+			-ms-transform: translateY(0);
+			transform: translateY(0);
 			opacity: 1;
 			text-align: right;
-			margin: -3.5em 4em 0 0;
+			margin: 0;
 		}
 
 			#header .content > :last-child {
@@ -4028,10 +4028,10 @@
 		}
 
 		body.is-loading #header .content {
-			-moz-transform: translateX(2em);
-			-webkit-transform: translateX(2em);
-			-ms-transform: translateX(2em);
-			transform: translateX(2em);
+			-moz-transform: translateY(-2em);
+			-webkit-transform: translateY(-2em);
+			-ms-transform: translateY(-2em);
+			transform: translateY(-2em);
 			opacity: 0;
 		}
 
