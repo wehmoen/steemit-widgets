@@ -23,9 +23,9 @@ Next you need to initialize the plugin. In this example we'll use the `blog()` f
 
 ```html
 <script>
-	$(function() {
-		$('#steemit-blog').steemit().blog({user: 'your-username'});
-	});
+  $(function() {
+    $('#steemit-blog').steemit().blog({user: 'your-username'});
+  });
 </script>
 ```
 
@@ -34,23 +34,23 @@ Put together your html file might look like this:
 ```html
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>My Website</title>
-	</head>
-	<body>
+  <head>
+    <title>My Website</title>
+  </head>
+  <body>
 
-		<h1>My Steemit Blog</h1>
-		<div id="my-blog"></div>
+    <h1>My Steemit Blog</h1>
+    <div id="my-blog"></div>
 
-		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		<script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
-		<script src="https://cdn.rawgit.com/mktcode/jquery-steemit/aa875039/jquery.steemit.min.js"></script>
-		<script>
-			$(function() {
-				$('#my-blog').steemit().blog({user: 'your-username'});
-			});
-		</script>
-	</body>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
+    <script src="https://cdn.rawgit.com/mktcode/jquery-steemit/aa875039/jquery.steemit.min.js"></script>
+    <script>
+      $(function() {
+        $('#my-blog').steemit().blog({user: 'your-username'});
+      });
+    </script>
+  </body>
 </html>
 ```
 
@@ -62,12 +62,12 @@ To adjust the display you can use a custom template with some placeholders for t
 
 ```html
 <script>
-	$(function() {
-		$('#my-blog').steemit().blog({
-			user: 'your-username',
-			template: '<div class="post"><a href="${URL}">${TITLE}</a><br>${Payout}, ${UPVOTES} Upvotes, ${COMMENTS} Comments</div>'
-		});
-	});
+  $(function() {
+  $('#my-blog').steemit().blog({
+      user: 'your-username',
+      template: '<div class="post"><a href="${URL}">${TITLE}</a><br>${Payout}, ${UPVOTES} Upvotes, ${COMMENTS} Comments</div>'
+    });
+  });
 </script>
 ```
 
@@ -75,19 +75,19 @@ The second option is to use a `<template>` tag with an id which you pass to the 
 
 ```html
 <template id="my-blog-post-template">
-	<div class="post">
-		<a href="${URL}">${TITLE}</a><br>
-		${Payout}, ${UPVOTES} Upvotes, ${COMMENTS} Comments
-	</div>
+  <div class="post">
+    <a href="${URL}">${TITLE}</a><br>
+    ${Payout}, ${UPVOTES} Upvotes, ${COMMENTS} Comments
+  </div>
 </template>
 
 <script>
-	$(function() {
-		$('#my-blog').steemit().blog({
-			user: 'your-username',
-			template: 'my-blog-post-template'
-		});
-	});
+  $(function() {
+    $('#my-blog').steemit().blog({
+      user: 'your-username',
+      template: 'my-blog-post-template'
+    });
+  });
 </script>
 ```
 
@@ -106,7 +106,7 @@ $('#my-profile').steemit().profile(options);
 #### Options
 
 Option | Description | Type | Default
-- | - | - | -
+------ | ----------- | ---- | -------
 username | Sets the steemit.com username whose profile to show. | String | mkt
 template | Provides the HTML to display the profile. Can be either an HTML string or the ID of a `<template>` tag. | String | `<img width="100" src="${PROFILE_IMAGE}" /><br><a href="https://steemit.com/@${USER}">@${USER}</a>`
 reputationPrecision | Sets the decimal precision for the reputation score. | Integer | 0
@@ -115,7 +115,7 @@ votingPowerPrecision | Sets the decimal precision for the current voting power. 
 #### Placeholders
 
 Placeholder | Description
-- | -
+----------- | -----------
 ${USER} | Outputs the username (without the @).
 ${NAME} | Outputs the alternative display name you can set in the steemit.com settings.
 ${LOCATION} | Outputs the users location.
@@ -138,7 +138,7 @@ $('#my-feed').steemit().feed(options);
 #### Options
 
 Option | Description | Type | Default
-- | - | - | -
+------ | ----------- | ---- | -------
 user | Sets the steemit.com username whose blog/feed to show. | String | mkt
 limit | Sets the number of posts to show. | Integer | 10
 template | Provides the HTML to display the posts. Can be either an HTML string or the ID of a `<template>` tag. | String | `<div><a href="${URL}">${TITLE}</a>${RESTEEMED}<br>${Payout}, ${UPVOTES} Upvotes, ${COMMENTS} Comments</div>`
@@ -150,7 +150,7 @@ dateCallback | Sets a callback function to handle the date display, for example 
 #### Placeholders
 
 Placeholder | Description
-- | -
+----------- | -----------
 ${URL} | Outputs the post url.
 ${TITLE} | Outputs the post's title.
 ${AUTHOR} | Outputs the author's username.
@@ -174,7 +174,7 @@ $('#my-trending-feed').steemit().trending(options);
 #### Options
 
 Option | Description | Type | Default
-- | - | - | -
+------ | ----------- | ---- | -------
 tag | Sets the tag for which to show posts. By default no tag is set and all posts will be shown. | String | null
 limit | Sets the number of posts to show. | Integer | 10
 template | Provides the HTML to display the posts. Can be either an HTML string or the ID of a `<template>` tag. | String | `<div><a href="${URL}">${TITLE}</a><br>${Payout}, ${UPVOTES} Upvotes, ${COMMENTS} Comments</div>`
@@ -185,7 +185,7 @@ dateCallback | Sets a callback function to handle the date display, for example 
 #### Placeholders
 
 Placeholder | Description
-- | -
+----------- | -----------
 ${URL} | Outputs the post url.
 ${TITLE} | Outputs the post's title.
 ${AUTHOR} | Outputs the author's username.
@@ -206,14 +206,14 @@ If you want to format the post dates you can use the `dateCallback` option. Here
 <script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
 <script src="https://cdn.rawgit.com/mktcode/jquery-steemit/aa875039/jquery.steemit.min.js"></script>
 <script>
-	$(function() {
-		$('#my-blog').steemit().blog({
-			user: 'your-username',
-			dateCallback: function (date) {
-				return moment.utc(date).from(moment.utc().format('YYYY-MM-DD HH:mm:ss'));
-			}
-		});
-	});
+  $(function() {
+  $('#my-blog').steemit().blog({
+      user: 'your-username',
+      dateCallback: function (date) {
+        return moment.utc(date).from(moment.utc().format('YYYY-MM-DD HH:mm:ss'));
+      }
+    });
+  });
 </script>
 ```
 
