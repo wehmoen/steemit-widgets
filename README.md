@@ -2,6 +2,8 @@
 
 **A simple way to display content from steemit.com on your website.**<br>by [mkt](http://steemit.com/@mkt)
 
+[Demo](https://mktcode.github.io/jquery-steemit/)
+
 ## How To Use
 
 First you need to decide where to put the content. You only need an empty element with an id somewhere on your website.
