@@ -18,7 +18,7 @@ Now add the necessary files to your website. You need jQuery, the javascript API
 ```html
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
-<script src="https://cdn.rawgit.com/mktcode/jquery-steemit/aa875039/jquery.steemit.min.js"></script>
+<script src="https://mktcode.github.io/jquery-steemit/assets/js/jquery.steemit.min.js"></script>
 ```
 
 Next you need to initialize the plugin. In this example we'll use the `blog()` function to display your blog posts.
@@ -46,7 +46,7 @@ Put together your html file might look like this:
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
-    <script src="https://cdn.rawgit.com/mktcode/jquery-steemit/aa875039/jquery.steemit.min.js"></script>
+    <script src="https://mktcode.github.io/jquery-steemit/assets/js/jquery.steemit.min.js"></script>
     <script>
       $(function() {
         $('#my-blog').steemit().blog({user: 'your-username'});
@@ -206,7 +206,7 @@ If you want to format the post dates you can use the `dateCallback` option. Here
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
-<script src="https://cdn.rawgit.com/mktcode/jquery-steemit/aa875039/jquery.steemit.min.js"></script>
+<script src="https://mktcode.github.io/jquery-steemit/assets/js/jquery.steemit.min.js"></script>
 <script>
   $(function() {
   $('#my-blog').steemit().blog({
