@@ -40,6 +40,8 @@
 
             element.html(template);
           });
+        } else {
+          element.html('Error: API not responding!');
         }
       });
     };
@@ -58,27 +60,31 @@
           }
       }, options);
 
-      steem.api.getDiscussionsByBlog({tag: settings.user, limit: settings.limit}, function(err, blog) {
+      steem.api.getDiscussionsByBlog({tag: settings.user, limit: settings.limit}, function(err, posts) {
+        if (!err && posts.length) {
           var html = '';
-          for (var i = 0; i < blog.length; i++) {
-            var metaData = JSON.parse(blog[i].json_metadata);
+          for (var i = 0; i < posts.length; i++) {
+            var metaData = JSON.parse(posts[i].json_metadata);
             var template = steemit.getTemplate(settings.template)
-              .replace(/\${URL}/gi, 'https://steemit.com' + blog[i].url)
-              .replace(/\${TITLE}/gi, blog[i].title)
-              .replace(/\${AUTHOR}/gi, blog[i].author)
-              .replace(/\${RESTEEMED}/gi, blog[i].author != settings.user ? settings.resteemedIndicator : '')
-              .replace(/\${RESTEEMEDBY}/gi, blog[i].first_reblogged_by ? 'resteemed by ' + blog[i].first_reblogged_by : '')
-              .replace(/\${DATE}/gi, settings.dateCallback(new Date(blog[i].created)))
+              .replace(/\${URL}/gi, 'https://steemit.com' + posts[i].url)
+              .replace(/\${TITLE}/gi, posts[i].title)
+              .replace(/\${AUTHOR}/gi, posts[i].author)
+              .replace(/\${RESTEEMED}/gi, posts[i].author != settings.user ? settings.resteemedIndicator : '')
+              .replace(/\${RESTEEMEDBY}/gi, posts[i].first_reblogged_by ? 'resteemed by ' + posts[i].first_reblogged_by : '')
+              .replace(/\${DATE}/gi, settings.dateCallback(new Date(posts[i].created)))
               .replace(/\${IMAGE}/gi, metaData.image ? metaData.image[0] : settings.defaultImage)
-              .replace(/\${PAYOUT}/gi, steemit.getPayout(blog[i]).toFixed(settings.payoutPrecision))
-              .replace(/\${COMMENTS}/gi, blog[i].children)
-              .replace(/\${UPVOTES}/gi, blog[i].net_votes)
-              .replace(/\${CATEGORY}/gi, blog[i].category);
+              .replace(/\${PAYOUT}/gi, steemit.getPayout(posts[i]).toFixed(settings.payoutPrecision))
+              .replace(/\${COMMENTS}/gi, posts[i].children)
+              .replace(/\${UPVOTES}/gi, posts[i].net_votes)
+              .replace(/\${CATEGORY}/gi, posts[i].category);
 
             html += template;
           }
           element.html(html);
-        });
+        } else {
+          element.html('Error: API not responding!');
+        }
+      });
     };
 
     // Feed
@@ -95,26 +101,30 @@
           }
       }, options);
 
-      steem.api.getDiscussionsByFeed({tag: settings.user, limit: settings.limit}, function(err, blog) {
-        var html = '';
-        for (var i = 0; i < blog.length; i++) {
-          var metaData = JSON.parse(blog[i].json_metadata);
-          var template = steemit.getTemplate(settings.template)
-            .replace(/\${URL}/gi, 'https://steemit.com' + blog[i].url)
-            .replace(/\${TITLE}/gi, blog[i].title)
-            .replace(/\${AUTHOR}/gi, blog[i].author)
-            .replace(/\${RESTEEMED}/gi, blog[i].first_reblogged_by ? settings.resteemedIndicator : '')
-            .replace(/\${RESTEEMEDBY}/gi, blog[i].first_reblogged_by ? 'resteemed by ' + blog[i].first_reblogged_by : '')
-            .replace(/\${DATE}/gi, settings.dateCallback(new Date(blog[i].created)))
-            .replace(/\${IMAGE}/gi, metaData.image ? metaData.image[0] : settings.defaultImage)
-            .replace(/\${PAYOUT}/gi, steemit.getPayout(blog[i]).toFixed(settings.payoutPrecision))
-            .replace(/\${COMMENTS}/gi, blog[i].children)
-            .replace(/\${UPVOTES}/gi, blog[i].net_votes)
-            .replace(/\${CATEGORY}/gi, blog[i].category);
+      steem.api.getDiscussionsByFeed({tag: settings.user, limit: settings.limit}, function(err, posts) {
+        if (!err && posts.length) {
+          var html = '';
+          for (var i = 0; i < posts.length; i++) {
+            var metaData = JSON.parse(posts[i].json_metadata);
+            var template = steemit.getTemplate(settings.template)
+              .replace(/\${URL}/gi, 'https://steemit.com' + posts[i].url)
+              .replace(/\${TITLE}/gi, posts[i].title)
+              .replace(/\${AUTHOR}/gi, posts[i].author)
+              .replace(/\${RESTEEMED}/gi, posts[i].first_reblogged_by ? settings.resteemedIndicator : '')
+              .replace(/\${RESTEEMEDBY}/gi, posts[i].first_reblogged_by ? 'resteemed by ' + posts[i].first_reblogged_by : '')
+              .replace(/\${DATE}/gi, settings.dateCallback(new Date(posts[i].created)))
+              .replace(/\${IMAGE}/gi, metaData.image ? metaData.image[0] : settings.defaultImage)
+              .replace(/\${PAYOUT}/gi, steemit.getPayout(posts[i]).toFixed(settings.payoutPrecision))
+              .replace(/\${COMMENTS}/gi, posts[i].children)
+              .replace(/\${UPVOTES}/gi, posts[i].net_votes)
+              .replace(/\${CATEGORY}/gi, posts[i].category);
 
-          html += template;
+            html += template;
+          }
+          element.html(html);
+        } else {
+          element.html('Error: API not responding!');
         }
-        element.html(html);
       });
     };
 
@@ -131,24 +141,28 @@
           }
       }, options);
 
-      steem.api.getDiscussionsByCreated({tag: settings.tag, limit: settings.limit}, function(err, blog) {
-        var html = '';
-        for (var i = 0; i < blog.length; i++) {
-          var metaData = JSON.parse(blog[i].json_metadata);
-          var template = steemit.getTemplate(settings.template)
-            .replace(/\${URL}/gi, 'https://steemit.com' + blog[i].url)
-            .replace(/\${TITLE}/gi, blog[i].title)
-            .replace(/\${AUTHOR}/gi, blog[i].author)
-            .replace(/\${DATE}/gi, settings.dateCallback(new Date(blog[i].created)))
-            .replace(/\${IMAGE}/gi, metaData.image ? metaData.image[0] : settings.defaultImage)
-            .replace(/\${PAYOUT}/gi, steemit.getPayout(blog[i]).toFixed(settings.payoutPrecision))
-            .replace(/\${COMMENTS}/gi, blog[i].children)
-            .replace(/\${UPVOTES}/gi, blog[i].net_votes)
-            .replace(/\${CATEGORY}/gi, blog[i].category);
+      steem.api.getDiscussionsByCreated({tag: settings.tag, limit: settings.limit}, function(err, posts) {
+        if (!err && posts.length) {
+          var html = '';
+          for (var i = 0; i < posts.length; i++) {
+            var metaData = JSON.parse(posts[i].json_metadata);
+            var template = steemit.getTemplate(settings.template)
+              .replace(/\${URL}/gi, 'https://steemit.com' + posts[i].url)
+              .replace(/\${TITLE}/gi, posts[i].title)
+              .replace(/\${AUTHOR}/gi, posts[i].author)
+              .replace(/\${DATE}/gi, settings.dateCallback(new Date(posts[i].created)))
+              .replace(/\${IMAGE}/gi, metaData.image ? metaData.image[0] : settings.defaultImage)
+              .replace(/\${PAYOUT}/gi, steemit.getPayout(posts[i]).toFixed(settings.payoutPrecision))
+              .replace(/\${COMMENTS}/gi, posts[i].children)
+              .replace(/\${UPVOTES}/gi, posts[i].net_votes)
+              .replace(/\${CATEGORY}/gi, posts[i].category);
 
-          html += template;
+            html += template;
+          }
+          element.html(html);
+        } else {
+          element.html('Error: API not responding!');
         }
-        element.html(html);
       });
     };
 
@@ -165,24 +179,28 @@
           }
       }, options);
 
-      steem.api.getDiscussionsByHot({tag: settings.tag, limit: settings.limit}, function(err, blog) {
-        var html = '';
-        for (var i = 0; i < blog.length; i++) {
-          var metaData = JSON.parse(blog[i].json_metadata);
-          var template = steemit.getTemplate(settings.template)
-            .replace(/\${URL}/gi, 'https://steemit.com' + blog[i].url)
-            .replace(/\${TITLE}/gi, blog[i].title)
-            .replace(/\${AUTHOR}/gi, blog[i].author)
-            .replace(/\${DATE}/gi, settings.dateCallback(new Date(blog[i].created)))
-            .replace(/\${IMAGE}/gi, metaData.image ? metaData.image[0] : settings.defaultImage)
-            .replace(/\${PAYOUT}/gi, steemit.getPayout(blog[i]).toFixed(settings.payoutPrecision))
-            .replace(/\${COMMENTS}/gi, blog[i].children)
-            .replace(/\${UPVOTES}/gi, blog[i].net_votes)
-            .replace(/\${CATEGORY}/gi, blog[i].category);
+      steem.api.getDiscussionsByHot({tag: settings.tag, limit: settings.limit}, function(err, posts) {
+        if (!err && posts.length) {
+          var html = '';
+          for (var i = 0; i < posts.length; i++) {
+            var metaData = JSON.parse(posts[i].json_metadata);
+            var template = steemit.getTemplate(settings.template)
+              .replace(/\${URL}/gi, 'https://steemit.com' + posts[i].url)
+              .replace(/\${TITLE}/gi, posts[i].title)
+              .replace(/\${AUTHOR}/gi, posts[i].author)
+              .replace(/\${DATE}/gi, settings.dateCallback(new Date(posts[i].created)))
+              .replace(/\${IMAGE}/gi, metaData.image ? metaData.image[0] : settings.defaultImage)
+              .replace(/\${PAYOUT}/gi, steemit.getPayout(posts[i]).toFixed(settings.payoutPrecision))
+              .replace(/\${COMMENTS}/gi, posts[i].children)
+              .replace(/\${UPVOTES}/gi, posts[i].net_votes)
+              .replace(/\${CATEGORY}/gi, posts[i].category);
 
-          html += template;
+            html += template;
+          }
+          element.html(html);
+        } else {
+          element.html('Error: API not responding!');
         }
-        element.html(html);
       });
     };
 
@@ -199,24 +217,28 @@
           }
       }, options);
 
-      steem.api.getDiscussionsByTrending({tag: settings.tag, limit: settings.limit}, function(err, blog) {
-        var html = '';
-        for (var i = 0; i < blog.length; i++) {
-          var metaData = JSON.parse(blog[i].json_metadata);
-          var template = steemit.getTemplate(settings.template)
-            .replace(/\${URL}/gi, 'https://steemit.com' + blog[i].url)
-            .replace(/\${TITLE}/gi, blog[i].title)
-            .replace(/\${AUTHOR}/gi, blog[i].author)
-            .replace(/\${DATE}/gi, settings.dateCallback(new Date(blog[i].created)))
-            .replace(/\${IMAGE}/gi, metaData.image ? metaData.image[0] : settings.defaultImage)
-            .replace(/\${PAYOUT}/gi, steemit.getPayout(blog[i]).toFixed(settings.payoutPrecision))
-            .replace(/\${COMMENTS}/gi, blog[i].children)
-            .replace(/\${UPVOTES}/gi, blog[i].net_votes)
-            .replace(/\${CATEGORY}/gi, blog[i].category);
+      steem.api.getDiscussionsByTrending({tag: settings.tag, limit: settings.limit}, function(err, posts) {
+        if (!err && posts.length) {
+          var html = '';
+          for (var i = 0; i < posts.length; i++) {
+            var metaData = JSON.parse(posts[i].json_metadata);
+            var template = steemit.getTemplate(settings.template)
+              .replace(/\${URL}/gi, 'https://steemit.com' + posts[i].url)
+              .replace(/\${TITLE}/gi, posts[i].title)
+              .replace(/\${AUTHOR}/gi, posts[i].author)
+              .replace(/\${DATE}/gi, settings.dateCallback(new Date(posts[i].created)))
+              .replace(/\${IMAGE}/gi, metaData.image ? metaData.image[0] : settings.defaultImage)
+              .replace(/\${PAYOUT}/gi, steemit.getPayout(posts[i]).toFixed(settings.payoutPrecision))
+              .replace(/\${COMMENTS}/gi, posts[i].children)
+              .replace(/\${UPVOTES}/gi, posts[i].net_votes)
+              .replace(/\${CATEGORY}/gi, posts[i].category);
 
-          html += template;
+            html += template;
+          }
+          element.html(html);
+        } else {
+          element.html('Error: API not responding!');
         }
-        element.html(html);
       });
     };
 
