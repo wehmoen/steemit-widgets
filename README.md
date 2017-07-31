@@ -110,7 +110,7 @@ $('#my-profile').steemit().profile(options);
 Option | Description | Type | Default
 ------ | ----------- | ---- | -------
 username | Sets the steemit.com username whose profile to show. | String | mkt
-template | Provides the HTML to display the profile. Can be either an HTML string or the ID of a `<template>` tag. | String | `<img width="100" src="${PROFILE_IMAGE}" /><br><a href="https://steemit.com/@${USER}">@${USER}</a>`
+template | Provides the HTML to display the profile. Can be either an HTML string or the ID of a `<template>` tag. | String | `<img width="100" src="${IMAGE}" /><br><a href="https://steemit.com/@${USER}">@${USER}</a>`
 reputationPrecision | Sets the decimal precision for the reputation score. | Integer | 0
 votingPowerPrecision | Sets the decimal precision for the current voting power. | Integer | 2
 
