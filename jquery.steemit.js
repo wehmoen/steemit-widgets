@@ -14,7 +14,7 @@
     steemit.profile = function(options) {
       var settings = $.extend({
         user: 'mkt',
-        template: '<img width="100" src="${PROFILE_IMAGE}" /><br><a href="https://steemit.com/@${USER}">@${USER}</a>',
+        template: '<img width="100" src="${IMAGE}" /><br><a href="https://steemit.com/@${USER}">@${USER}</a>',
         reputationPrecision: 0,
         votingPowerPrecision: 2
       }, options);
