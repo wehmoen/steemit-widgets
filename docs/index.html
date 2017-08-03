@@ -26,7 +26,7 @@
         <h1><a href="#">Steemit Widgets</a></h1>
         <p>A simple way to display content<br>from <a href="https://steemit.com">steemit.com</a> on your website.</p>
         <ul class="actions">
-          <li><a href="https://github.com/mktcode/jquery-steemit/archive/master.zip" class="button special icon fa-download">Download</a></li>
+          <li><a href="https://github.com/mktcode/steemit-widgets/archive/master.zip" class="button special icon fa-download">Download</a></li>
           <li><a href="#demo" class="button icon fa-eye scrolly">Demo</a></li>
           <li><a href="#how-to-use" class="button icon fa-info scrolly">How To Use</a></li>
         </ul>
@@ -92,7 +92,7 @@
           You don't have to download anything if you use the CDN links in the code below. Just copy these lines and paste them right before your closing <code>&lt;/body&gt;</code> tag.
         </p>
         <pre><code class="html">&lt;script src=&quot;https://cdn.steemjs.com/lib/latest/steem.min.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;https://mktcode.github.io/jquery-steemit/assets/js/jquery.steemit.min.js&quot;&gt;&lt;/script&gt;</code></pre>
+&lt;script src=&quot;https://mktcode.github.io/steemit-widgets/assets/js/steemit-widgets.min.js&quot;&gt;&lt;/script&gt;</code></pre>
         <p>
           Next you need to initialize the widget you want. All the widget functions are accessible through the <code>steemitWidgets</code> object.
           In this example we'll use the <code>blog()</code> function to display your blog posts.
@@ -114,7 +114,7 @@
     &lt;div id=&quot;my-blog&quot;&gt;&lt;/div&gt;
 
     &lt;script src=&quot;https://cdn.steemjs.com/lib/latest/steem.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;https://mktcode.github.io/jquery-steemit/assets/js/jquery.steemit.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://mktcode.github.io/steemit-widgets/assets/js/steemit-widgets.min.js&quot;&gt;&lt;/script&gt;
     &lt;script&gt;
       steemitWidgets.blog({
         element: 'my-blog',
@@ -544,7 +544,7 @@ steemitWidgets.trending(options);</code></pre>
           If you want to format the post dates you can use the <code>dateCallback</code> option. Here is an example of how to display realtive times like "1 hour ago" like on steemit.com with <a href="https://momentjs.com">moment.js</a>.
         </p>
         <pre><code class="html">&lt;script src=&quot;https://cdn.steemjs.com/lib/latest/steem.min.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;https://mktcode.github.io/jquery-steemit/assets/js/jquery.steemit.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://mktcode.github.io/steemit-widgets/assets/js/steemit-widgets.min.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
   steemitWidgets.blog({
@@ -572,7 +572,7 @@ steemitWidgets.trending(options);</code></pre>
         </p>
         <pre><code class="html">&lt;script src=&quot;https://code.jquery.com/jquery-3.2.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;https://cdn.steemjs.com/lib/latest/steem.min.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;https://mktcode.github.io/jquery-steemit/assets/js/jquery.steemit.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://mktcode.github.io/steemit-widgets/assets/js/steemit-widgets.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
   $('#my-profile').steemitProfile({user: 'your-username'});
   $('#my-blog').steemitBlog({user: 'your-username'});
@@ -590,7 +590,7 @@ steemitWidgets.trending(options);</code></pre>
     <!-- Footer -->
     <footer id="footer">
       <ul class="icons">
-        <li><a href="https://github.com/mktcode/jquery-steemit" class="icon fa-github"><span class="label">GitHub</span></a></li>
+        <li><a href="https://github.com/mktcode/steemit-widgets" class="icon fa-github"><span class="label">GitHub</span></a></li>
       </ul>
       <p>
           <i class="uk-icon-btc"></i> BTC Address:</b><br>
@@ -711,8 +711,7 @@ steemitWidgets.trending(options);</code></pre>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 
     <script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
-    <!-- <script src="https://mktcode.github.io/jquery-steemit/assets/js/jquery.steemit.min.js"></script> -->
-    <script src="../jquery.steemit.js"></script>
+    <script src="https://mktcode.github.io/steemit-widgets/assets/js/steemit-widgets.min.js"></script>
     <script>
       $(function() {
         hljs.configure({style: 'github'});
