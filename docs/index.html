@@ -609,16 +609,16 @@ steemitWidgets.trending(options);</code></pre>
     <!-- Demo Templates -->
     <template id="steemit-profile-template">
       <article class="uk-comment">
-        <header class="uk-comment-header uk-text-left">
-          <div class="uk-comment-avatar" style="background: url(${IMAGE}) center center; background-size: cover; width: 50px; height: 50px;"></div>
+        <header class="uk-comment-header uk-text-left" style="background: url(${COVERIMAGE}) center center; background-size: cover;">
+          <div class="uk-comment-avatar" style="background: url(${IMAGE}) center center; background-size: cover; width: 50px; height: 50px; border-radius: 36px;"></div>
           <h4 class="uk-comment-title"><a href="https://steemit.com/@${USER}">@${USER}</a> <div class="uk-badge uk-badge-notification">${REPUTATION}</div></h4>
           <div class="uk-comment-meta"><a href="${WEBSITE}">${WEBSITE}</a><br>${ABOUT}</div>
         </header>
         <div class="uk-comment-body">
           <div class="uk-grid">
-            <div class="uk-width-1-3">${POSTCOUNT}<br><sup>Posts</sup></div>
-            <div class="uk-width-1-3">${FOLLOWERS}<br><sup>Followers</sup></div>
-            <div class="uk-width-1-3">${FOLLOWING}<br><sup>Following</sup></div>
+            <div class="uk-width-1-3"><b>${POSTCOUNT}</b><br><sup>Posts</sup></div>
+            <div class="uk-width-1-3"><b>${FOLLOWERS}</b><br><sup>Followers</sup></div>
+            <div class="uk-width-1-3"><b>${FOLLOWING}</b><br><sup>Following</sup></div>
             <div class="uk-width-1-2 uk-text-small uk-text-left">Voting Power: ${VOTINGPOWER} %</div>
             <div class="uk-width-1-2 uk-text-small uk-text-right"><i class="uk-icon-map-marker"></i> ${LOCATION}</div>
           </div>
@@ -711,7 +711,8 @@ steemitWidgets.trending(options);</code></pre>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 
     <script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
-    <script src="https://mktcode.github.io/steemit-widgets/assets/js/steemit-widgets.min.js"></script>
+    <!-- <script src="https://mktcode.github.io/steemit-widgets/assets/js/steemit-widgets.min.js"></script> -->
+    <script src="../steemit-widgets.js"></script>
     <script>
       $(function() {
         hljs.configure({style: 'github'});

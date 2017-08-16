@@ -39,6 +39,7 @@ steemitWidgets.profile = function(options) {
             .replace(/\${LOCATION}/gi, metaData.location)
             .replace(/\${WEBSITE}/gi, metaData.website)
             .replace(/\${IMAGE}/gi, metaData.profile_image)
+            .replace(/\${COVERIMAGE}/gi, metaData.cover_image)
             .replace(/\${REPUTATION}/gi, steemitWidgets.calculateReputation(profile.reputation, settings.reputationPrecision))
             .replace(/\${VOTINGPOWER}/gi, steemitWidgets.calculateVotingPower(profile.voting_power, profile.last_vote_time, settings.votingPowerPrecision))
             .replace(/\${FOLLOWERS}/gi, followers.follower_count)
