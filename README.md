@@ -122,6 +122,7 @@ ${NAME} | Outputs the alternative display name you can set in the steemit.com se
 ${LOCATION} | Outputs the users location.
 ${WEBSITE} | Outputs the users website url.
 ${IMAGE} | Outputs the users profile image url.
+${COVERIMAGE} | Outputs the users cover image url.
 ${REPUTATION} | Outputs the users reputation.
 ${VOTINGPOWER} | Outputs the users actual current voting power.
 ${FOLLOWERS} | Outputs the number of followers the user has.
