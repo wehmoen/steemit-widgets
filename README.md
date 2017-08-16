@@ -111,7 +111,7 @@ username | Sets the steemit.com username whose profile to show. | String | mkt
 template | Provides the HTML to display the profile. Can be either an HTML string or the ID of a `<template>` tag. | String | `<img width="100" src="${IMAGE}" /><br><a href="https://steemit.com/@${USER}">@${USER}</a>`
 reputationPrecision | Sets the decimal precision for the reputation score. | Integer | 0
 votingPowerPrecision | Sets the decimal precision for the current voting power. | Integer | 2
-updateInterval | Sets the interval in seconds to update the output. Set to 0 to disable updates. | Integer | 10
+updateInterval | Sets the interval in seconds to update the output. Set to 0 to disable updates. | Integer | 60
 
 #### Placeholders
 
@@ -149,7 +149,7 @@ defaultImage | Sets the URL for a default image if there is no post image. | Str
 resteemedIndicator | Sets the HTML displayed by ${RESTEEMED} placeholder if a post was resteemed. | String | (resteemed)
 payoutPrecision | Sets the decimal precision for the payout amount. | Integer | 2
 dateCallback | Sets a callback function to handle the date display, for example with moment.js. | Function | `function (date) {return date;}`
-updateInterval | Sets the interval in seconds to update the output. Set to 0 to disable updates. | Integer | 10
+updateInterval | Sets the interval in seconds to update the output. Set to 0 to disable updates. | Integer | 60
 
 #### Placeholders
 
@@ -186,7 +186,7 @@ template | Provides the HTML to display the posts. Can be either an HTML string 
 defaultImage | Sets the URL for a default image if there is no post image. | String | 	[show](https://steemitimages.com/DQmXYX9hqSNcikTK8ARb61BPnTk4CKMhaiqr22iCKD8CKsp/steemit-logo.png)
 payoutPrecision | Sets the decimal precision for the payout amount. | Integer | 2
 dateCallback | Sets a callback function to handle the date display, for example with moment.js. | Function | `function (date) {return date;}`
-updateInterval | Sets the interval in seconds to update the output. Set to 0 to disable updates. | Integer | 10
+updateInterval | Sets the interval in seconds to update the output. Set to 0 to disable updates. | Integer | 60
 
 #### Placeholders
 

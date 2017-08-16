@@ -15,7 +15,7 @@ steemitWidgets.profile = function(options) {
     template: '<img width="100" src="${IMAGE}" /><br><a href="https://steemit.com/@${USER}">@${USER}</a>',
     reputationPrecision: 0,
     votingPowerPrecision: 2,
-    updateInterval: 10
+    updateInterval: 60
   }, options);
 
   var element = settings.element instanceof Element ? settings.element : document.getElementById(settings.element);
@@ -69,7 +69,7 @@ steemitWidgets.blog = function(options) {
     defaultImage: 'https://steemitimages.com/DQmXYX9hqSNcikTK8ARb61BPnTk4CKMhaiqr22iCKD8CKsp/steemit-logo.png',
     resteemedIndicator: ' (resteemed) ',
     payoutPrecision: 2,
-    updateInterval: 10,
+    updateInterval: 60,
     dateCallback: function (date) {
         return date;
     }
@@ -125,7 +125,7 @@ steemitWidgets.feed = function(options) {
     defaultImage: 'https://steemitimages.com/DQmXYX9hqSNcikTK8ARb61BPnTk4CKMhaiqr22iCKD8CKsp/steemit-logo.png',
     resteemedIndicator: ' (resteemed) ',
     payoutPrecision: 2,
-    updateInterval: 10,
+    updateInterval: 60,
     dateCallback: function (date) {
         return date;
     }
@@ -180,7 +180,7 @@ steemitWidgets.new = function(options) {
     template: '<div><a href="${URL}">${TITLE}</a><br>${Payout}, ${UPVOTES} Upvotes, ${COMMENTS} Comments</div>',
     defaultImage: 'https://steemitimages.com/DQmXYX9hqSNcikTK8ARb61BPnTk4CKMhaiqr22iCKD8CKsp/steemit-logo.png',
     payoutPrecision: 2,
-    updateInterval: 10,
+    updateInterval: 60,
     dateCallback: function (date) {
         return date;
     }
@@ -233,7 +233,7 @@ steemitWidgets.hot = function(options) {
     template: '<div><a href="${URL}">${TITLE}</a><br>${Payout}, ${UPVOTES} Upvotes, ${COMMENTS} Comments</div>',
     defaultImage: 'https://steemitimages.com/DQmXYX9hqSNcikTK8ARb61BPnTk4CKMhaiqr22iCKD8CKsp/steemit-logo.png',
     payoutPrecision: 2,
-    updateInterval: 10,
+    updateInterval: 60,
     dateCallback: function (date) {
         return date;
     }
@@ -286,7 +286,7 @@ steemitWidgets.trending = function(options) {
     template: '<div><a href="${URL}">${TITLE}</a><br>${Payout}, ${UPVOTES} Upvotes, ${COMMENTS} Comments</div>',
     defaultImage: 'https://steemitimages.com/DQmXYX9hqSNcikTK8ARb61BPnTk4CKMhaiqr22iCKD8CKsp/steemit-logo.png',
     payoutPrecision: 2,
-    updateInterval: 10,
+    updateInterval: 60,
     dateCallback: function (date) {
         return date;
     }
