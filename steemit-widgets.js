@@ -7,6 +7,8 @@
 
 var steemitWidgets = {};
 
+steemitWidgets.updateIntervals = [];
+
 // Profile
 steemitWidgets.profile = function(options) {
   var settings = Object.assign({
@@ -23,7 +25,7 @@ steemitWidgets.profile = function(options) {
   if (element) {
     run();
     if (settings.updateInterval) {
-      setInterval(run, settings.updateInterval * 1000);
+      steemitWidgets.updateIntervals.push(setInterval(run, settings.updateInterval * 1000));
     }
 
     function run() {
@@ -80,7 +82,7 @@ steemitWidgets.blog = function(options) {
   if (element) {
     run();
     if (settings.updateInterval) {
-      setInterval(run, settings.updateInterval * 1000);
+      steemitWidgets.updateIntervals.push(setInterval(run, settings.updateInterval * 1000));
     }
 
     function run() {
@@ -136,7 +138,7 @@ steemitWidgets.feed = function(options) {
   if (element) {
     run();
     if (settings.updateInterval) {
-      setInterval(run, settings.updateInterval * 1000);
+      steemitWidgets.updateIntervals.push(setInterval(run, settings.updateInterval * 1000));
     }
 
     function run() {
@@ -191,7 +193,7 @@ steemitWidgets.new = function(options) {
   if (element) {
     run();
     if (settings.updateInterval) {
-      setInterval(run, settings.updateInterval * 1000);
+      steemitWidgets.updateIntervals.push(setInterval(run, settings.updateInterval * 1000));
     }
 
     function run() {
@@ -244,7 +246,7 @@ steemitWidgets.hot = function(options) {
   if (element) {
     run();
     if (settings.updateInterval) {
-      setInterval(run, settings.updateInterval * 1000);
+      steemitWidgets.updateIntervals.push(setInterval(run, settings.updateInterval * 1000));
     }
 
     function run() {
@@ -297,7 +299,7 @@ steemitWidgets.trending = function(options) {
   if (element) {
     run();
     if (settings.updateInterval) {
-      setInterval(run, settings.updateInterval * 1000);
+      steemitWidgets.updateIntervals.push(setInterval(run, settings.updateInterval * 1000));
     }
 
     function run() {
