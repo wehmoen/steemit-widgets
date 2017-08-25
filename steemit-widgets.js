@@ -358,7 +358,10 @@ steemitWidgets.getPayout = function(post) {
 }
 
 steemitWidgets.calculateReputation = function(rep, precision) {
-  return (rep < 0 ? '-' : '') + ((((Math.log10(Math.abs(rep))) - 9) * 9) + 25).toFixed(precision);
+  var reputation = ((((Math.log10(Math.abs(rep))) - 9) * 9) + 25),
+      precision = parseInt(precision);
+
+  return (rep < 0 ? '-' : '') + (precision ? reputation.toFixed(precision) : Math.floor(reputation));
 }
 
 steemitWidgets.calculateVotingPower = function(votingPower, lastVoteTime, precision) {
