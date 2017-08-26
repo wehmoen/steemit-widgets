@@ -26,7 +26,10 @@
         <h1><a href="#">Steemit Widgets</a></h1>
         <p>A simple way to display content<br>from <a href="https://steemit.com">steemit.com</a> on your website.</p>
         <ul class="actions">
-          <li><a href="https://github.com/mktcode/steemit-widgets/archive/master.zip" class="button special icon fa-download">Download</a></li>
+          <li><a href="generator.html" class="button special icon fa-magic">Generator</a></li>
+        </ul>
+        <ul class="actions">
+          <li><a href="https://github.com/mktcode/steemit-widgets/archive/master.zip" class="button icon fa-download">Download</a></li>
           <li><a href="#demo" class="button icon fa-eye scrolly">Demo</a></li>
           <li><a href="#how-to-use" class="button icon fa-info scrolly">How To Use</a></li>
         </ul>
@@ -225,6 +228,12 @@
                 <td>Integer</td>
                 <td>60</td>
               </tr>
+              <tr>
+                <td><i>createdCallback</i></td>
+                <td>Sets a callback function to handle the created date display, for example with moment.js.</td>
+                <td>Function</td>
+                <td><code>var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; created = new Date(created); return monthNames[created.getMonth()] + ' ' + created.getDate() + ', ' + created.getFullYear();</code></td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -348,6 +357,12 @@ steemitWidgets.feed(options);</code></pre>
                 <td>2</td>
               </tr>
               <tr>
+                <td><i>reputationPrecision</i></td>
+                <td>Sets the decimal precision for the reputation scores.</td>
+                <td>Integer</td>
+                <td>0</td>
+              </tr>
+              <tr>
                 <td><i>dateCallback</i></td>
                 <td>Sets a callback function to handle the date display, for example with <a href="https://momentjs.com">moment.js</a>.</td>
                 <td>Function</td>
@@ -403,6 +418,10 @@ steemitWidgets.feed(options);</code></pre>
               <tr>
                 <td><i>${PAYOUT}</i></td>
                 <td>Outputs the full pending or past payout amount.</td>
+              </tr>
+              <tr>
+                <td><i>${REPUTATION}</i></td>
+                <td>Outputs the users reputation.</td>
               </tr>
               <tr>
                 <td><i>${COMMENTS}</i></td>
@@ -473,6 +492,12 @@ steemitWidgets.trending(options);</code></pre>
                 <td>2</td>
               </tr>
               <tr>
+                <td><i>reputationPrecision</i></td>
+                <td>Sets the decimal precision for the reputation scores.</td>
+                <td>Integer</td>
+                <td>0</td>
+              </tr>
+              <tr>
                 <td><i>dateCallback</i></td>
                 <td>Sets a callback function to handle the date display, for example with <a href="https://momentjs.com">moment.js</a>.</td>
                 <td>Function</td>
@@ -520,6 +545,10 @@ steemitWidgets.trending(options);</code></pre>
               <tr>
                 <td><i>${PAYOUT}</i></td>
                 <td>Outputs the full pending or past payout amount.</td>
+              </tr>
+              <tr>
+                <td><i>${REPUTATION}</i></td>
+                <td>Outputs the users reputation.</td>
               </tr>
               <tr>
                 <td><i>${COMMENTS}</i></td>

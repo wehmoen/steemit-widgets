@@ -112,6 +112,7 @@ template | Provides the HTML to display the profile. Can be either an HTML strin
 reputationPrecision | Sets the decimal precision for the reputation score. | Integer | 0
 votingPowerPrecision | Sets the decimal precision for the current voting power. | Integer | 2
 updateInterval | Sets the interval in seconds to update the output. Set to 0 to disable updates. | Integer | 60
+createdCallback | Sets a callback function to handle the created date display, for example with moment.js. | Function | `var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; created = new Date(created); return monthNames[created.getMonth()] + ' ' + created.getDate() + ', ' + created.getFullYear();`
 
 #### Placeholders
 
@@ -148,6 +149,7 @@ template | Provides the HTML to display the posts. Can be either an HTML string 
 defaultImage | Sets the URL for a default image if there is no post image. | String | [show](https://steemitimages.com/DQmXYX9hqSNcikTK8ARb61BPnTk4CKMhaiqr22iCKD8CKsp/steemit-logo.png)
 resteemedIndicator | Sets the HTML displayed by ${RESTEEMED} placeholder if a post was resteemed. | String | (resteemed)
 payoutPrecision | Sets the decimal precision for the payout amount. | Integer | 2
+reputationPrecision | Sets the decimal precision for the reputation scores. | Integer | 0
 dateCallback | Sets a callback function to handle the date display, for example with moment.js. | Function | `function (date) {return date;}`
 updateInterval | Sets the interval in seconds to update the output. Set to 0 to disable updates. | Integer | 60
 
@@ -163,6 +165,7 @@ ${RESTEEMEDBY} | Outputs the username (prefixed with "resteemed by") of the user
 ${DATE} | Outputs the post's creation date. Can be customized using the `dateCallback` option.
 ${IMAGE} | Outputs the post's image url.
 ${PAYOUT} | Outputs the full pending or past payout amount.
+${REPUTATION} | Outputs the users reputation.
 ${COMMENTS} | Outputs the number of comments on the post.
 ${UPVOTES} | Outputs the number of upvotes the post has received.
 ${CATEGORY} | Outputs the post's category (first tag).
@@ -185,6 +188,7 @@ limit | Sets the number of posts to show. | Integer | 10
 template | Provides the HTML to display the posts. Can be either an HTML string or the ID of a `<template>` tag. | String | `<div><a href="${URL}">${TITLE}</a><br>${Payout}, ${UPVOTES} Upvotes, ${COMMENTS} Comments</div>`
 defaultImage | Sets the URL for a default image if there is no post image. | String | 	[show](https://steemitimages.com/DQmXYX9hqSNcikTK8ARb61BPnTk4CKMhaiqr22iCKD8CKsp/steemit-logo.png)
 payoutPrecision | Sets the decimal precision for the payout amount. | Integer | 2
+reputationPrecision | Sets the decimal precision for the reputation score. | Integer | 0
 dateCallback | Sets a callback function to handle the date display, for example with moment.js. | Function | `function (date) {return date;}`
 updateInterval | Sets the interval in seconds to update the output. Set to 0 to disable updates. | Integer | 60
 
@@ -198,6 +202,7 @@ ${AUTHOR} | Outputs the author's username.
 ${DATE} | Outputs the post's creation date. Can be customized using the `dateCallback` option.
 ${IMAGE} | Outputs the post's image url.
 ${PAYOUT} | Outputs the full pending or past payout amount.
+${REPUTATION} | Outputs the users reputation.
 ${COMMENTS} | Outputs the number of comments on the post.
 ${UPVOTES} | Outputs the number of upvotes the post has received.
 ${CATEGORY} | Outputs the post's category (first tag).

@@ -17,7 +17,13 @@ steemitWidgets.profile = function(options) {
     template: '<img width="100" src="${IMAGE}" /><br><a href="https://steemit.com/@${USER}">@${USER}</a>',
     reputationPrecision: 0,
     votingPowerPrecision: 2,
-    updateInterval: 60
+    updateInterval: 60,
+    createdCallback: function (created) {
+      var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+      created = new Date(created);
+      return monthNames[created.getMonth()] + ' ' + created.getDate() + ', ' + created.getFullYear();
+    }
   }, options);
 
   var element = settings.element instanceof Element ? settings.element : document.getElementById(settings.element);
@@ -32,7 +38,7 @@ steemitWidgets.profile = function(options) {
       steem.api.getAccounts([settings.user], function(err, profile) {
         if (!err && profile.length) {
           var profile = profile[0];
-          var metaData = JSON.parse(profile.json_metadata).profile;
+          var metaData = profile.json_metadata ? JSON.parse(profile.json_metadata).profile : {};
 
           steem.api.getFollowCount(settings.user, function(err, followers) {
             var template = steemitWidgets.getTemplate(settings.template)
@@ -47,6 +53,7 @@ steemitWidgets.profile = function(options) {
             .replace(/\${FOLLOWERS}/gi, followers.follower_count)
             .replace(/\${FOLLOWING}/gi, followers.following_count)
             .replace(/\${POSTCOUNT}/gi, profile.post_count)
+            .replace(/\${CREATED}/gi, settings.createdCallback(profile.created))
             .replace(/\${ABOUT}/gi, metaData.about);
 
             element.innerHTML = template;
@@ -71,6 +78,7 @@ steemitWidgets.blog = function(options) {
     defaultImage: 'https://steemitimages.com/DQmXYX9hqSNcikTK8ARb61BPnTk4CKMhaiqr22iCKD8CKsp/steemit-logo.png',
     resteemedIndicator: ' (resteemed) ',
     payoutPrecision: 2,
+    reputationPrecision: 0,
     updateInterval: 60,
     dateCallback: function (date) {
         return date;
@@ -95,6 +103,7 @@ steemitWidgets.blog = function(options) {
               .replace(/\${URL}/gi, 'https://steemit.com' + posts[i].url)
               .replace(/\${TITLE}/gi, posts[i].title)
               .replace(/\${AUTHOR}/gi, posts[i].author)
+              .replace(/\${REPUTATION}/gi, steemitWidgets.calculateReputation(posts[i].author_reputation, settings.reputationPrecision))
               .replace(/\${RESTEEMED}/gi, posts[i].author != settings.user ? settings.resteemedIndicator : '')
               .replace(/\${RESTEEMEDBY}/gi, posts[i].first_reblogged_by ? 'resteemed by ' + posts[i].first_reblogged_by : '')
               .replace(/\${DATE}/gi, settings.dateCallback(new Date(posts[i].created)))
@@ -127,6 +136,7 @@ steemitWidgets.feed = function(options) {
     defaultImage: 'https://steemitimages.com/DQmXYX9hqSNcikTK8ARb61BPnTk4CKMhaiqr22iCKD8CKsp/steemit-logo.png',
     resteemedIndicator: ' (resteemed) ',
     payoutPrecision: 2,
+    reputationPrecision: 0,
     updateInterval: 60,
     dateCallback: function (date) {
         return date;
@@ -151,6 +161,7 @@ steemitWidgets.feed = function(options) {
             .replace(/\${URL}/gi, 'https://steemit.com' + posts[i].url)
             .replace(/\${TITLE}/gi, posts[i].title)
             .replace(/\${AUTHOR}/gi, posts[i].author)
+            .replace(/\${REPUTATION}/gi, steemitWidgets.calculateReputation(posts[i].author_reputation, settings.reputationPrecision))
             .replace(/\${RESTEEMED}/gi, posts[i].first_reblogged_by ? settings.resteemedIndicator : '')
             .replace(/\${RESTEEMEDBY}/gi, posts[i].first_reblogged_by ? 'resteemed by ' + posts[i].first_reblogged_by : '')
             .replace(/\${DATE}/gi, settings.dateCallback(new Date(posts[i].created)))
@@ -182,6 +193,7 @@ steemitWidgets.new = function(options) {
     template: '<div><a href="${URL}">${TITLE}</a><br>${Payout}, ${UPVOTES} Upvotes, ${COMMENTS} Comments</div>',
     defaultImage: 'https://steemitimages.com/DQmXYX9hqSNcikTK8ARb61BPnTk4CKMhaiqr22iCKD8CKsp/steemit-logo.png',
     payoutPrecision: 2,
+    reputationPrecision: 0,
     updateInterval: 60,
     dateCallback: function (date) {
         return date;
@@ -206,6 +218,7 @@ steemitWidgets.new = function(options) {
             .replace(/\${URL}/gi, 'https://steemit.com' + posts[i].url)
             .replace(/\${TITLE}/gi, posts[i].title)
             .replace(/\${AUTHOR}/gi, posts[i].author)
+            .replace(/\${REPUTATION}/gi, steemitWidgets.calculateReputation(posts[i].author_reputation, settings.reputationPrecision))
             .replace(/\${DATE}/gi, settings.dateCallback(new Date(posts[i].created)))
             .replace(/\${IMAGE}/gi, metaData.image ? metaData.image[0] : settings.defaultImage)
             .replace(/\${PAYOUT}/gi, steemitWidgets.getPayout(posts[i]).toFixed(settings.payoutPrecision))
@@ -235,6 +248,7 @@ steemitWidgets.hot = function(options) {
     template: '<div><a href="${URL}">${TITLE}</a><br>${Payout}, ${UPVOTES} Upvotes, ${COMMENTS} Comments</div>',
     defaultImage: 'https://steemitimages.com/DQmXYX9hqSNcikTK8ARb61BPnTk4CKMhaiqr22iCKD8CKsp/steemit-logo.png',
     payoutPrecision: 2,
+    reputationPrecision: 0,
     updateInterval: 60,
     dateCallback: function (date) {
         return date;
@@ -259,6 +273,7 @@ steemitWidgets.hot = function(options) {
             .replace(/\${URL}/gi, 'https://steemit.com' + posts[i].url)
             .replace(/\${TITLE}/gi, posts[i].title)
             .replace(/\${AUTHOR}/gi, posts[i].author)
+            .replace(/\${REPUTATION}/gi, steemitWidgets.calculateReputation(posts[i].author_reputation, settings.reputationPrecision))
             .replace(/\${DATE}/gi, settings.dateCallback(new Date(posts[i].created)))
             .replace(/\${IMAGE}/gi, metaData.image ? metaData.image[0] : settings.defaultImage)
             .replace(/\${PAYOUT}/gi, steemitWidgets.getPayout(posts[i]).toFixed(settings.payoutPrecision))
@@ -288,6 +303,7 @@ steemitWidgets.trending = function(options) {
     template: '<div><a href="${URL}">${TITLE}</a><br>${Payout}, ${UPVOTES} Upvotes, ${COMMENTS} Comments</div>',
     defaultImage: 'https://steemitimages.com/DQmXYX9hqSNcikTK8ARb61BPnTk4CKMhaiqr22iCKD8CKsp/steemit-logo.png',
     payoutPrecision: 2,
+    reputationPrecision: 0,
     updateInterval: 60,
     dateCallback: function (date) {
         return date;
@@ -312,6 +328,7 @@ steemitWidgets.trending = function(options) {
             .replace(/\${URL}/gi, 'https://steemit.com' + posts[i].url)
             .replace(/\${TITLE}/gi, posts[i].title)
             .replace(/\${AUTHOR}/gi, posts[i].author)
+            .replace(/\${REPUTATION}/gi, steemitWidgets.calculateReputation(posts[i].author_reputation, settings.reputationPrecision))
             .replace(/\${DATE}/gi, settings.dateCallback(new Date(posts[i].created)))
             .replace(/\${IMAGE}/gi, metaData.image ? metaData.image[0] : settings.defaultImage)
             .replace(/\${PAYOUT}/gi, steemitWidgets.getPayout(posts[i]).toFixed(settings.payoutPrecision))
