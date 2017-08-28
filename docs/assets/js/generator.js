@@ -197,7 +197,7 @@ var generator = new Vue({
                     codeScriptsContainer.html('<pre><code class="html hljs xml">' + code + '</code></pre>');
                     break;
                 case 'feed':
-                    codeWidgetContainer.html('<pre><code class="html hljs xml">&lt;div id=&quot;steemit-widgets-blog&quot;&gt;&lt;/div&gt;</code></pre>');
+                    codeWidgetContainer.html('<pre><code class="html hljs xml">&lt;div id=&quot;steemit-widgets-feed&quot;&gt;&lt;/div&gt;</code></pre>');
 
                     var template = document.getElementById('steemit-feed-template-' + this.template).innerHTML.replace(/&quot;/g, '\\\'').replace(/\n/g, '');
 
@@ -206,7 +206,7 @@ var generator = new Vue({
                          + this.encodeHTML(this.scriptMomentjs) + nl
                          + '&lt;script&gt;' + nl
                          + '  steemitWidgets.feed({' + nl
-                         + '    element: \'steemit-widgets-blog\',' + nl
+                         + '    element: \'steemit-widgets-feed\',' + nl
                          + '    user: \'' + this.user + '\',' + nl
                          + '    limit: ' + this.limit + ',' + nl
                          + '    template: \'' + this.encodeHTML(template) + '\',' + nl
