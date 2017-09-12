@@ -389,7 +389,7 @@ steemitWidgets.ticker = function(options) {
                             .replace(/\${IMAGE}/g, 'https://files.coinmarketcap.com/static/img/coins/64x64/' + ticker.id + '.png')
                             .replace(/\${24H_VOLUME_USD}/g, parseFloat(ticker['24h_volume_usd']).toLocaleString(undefined, {minimumFractionDigits: 2}))
                             .replace(/\${AVAILABLE_SUPPLY}/g, parseFloat(ticker.available_supply).toLocaleString(undefined, {minimumFractionDigits: 2}))
-                            .replace(/\${TOTAL_SUPPLY}/g, ticker.total_supply)
+                            .replace(/\${TOTAL_SUPPLY}/g, parseFloat(ticker.total_supply).toLocaleString(undefined, {minimumFractionDigits: 2}))
                             .replace(/\${MARKET_CAP_USD}/g, parseFloat(ticker.market_cap_usd).toLocaleString())
                             .replace(/\${PERCENT_CHANGE_1H}/g, steemitWidgets.getColoredPercentChange(ticker.percent_change_1h))
                             .replace(/\${PERCENT_CHANGE_7D}/g, steemitWidgets.getColoredPercentChange(ticker.percent_change_7d))
