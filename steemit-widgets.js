@@ -395,8 +395,6 @@ steemitWidgets.ticker = function(options) {
                             .replace(/\${PRICE_BTC}/g, parseFloat(ticker.price_btc).toFixed(settings.priceBTCPrecision))
                             .replace(/\${PRICE_USD}/g, parseFloat(ticker.price_usd).toFixed(settings.priceUSDPrecision));
 
-                        console.log(ticker);
-
                         html += template;
                         element.innerHTML = html;
                     } else {
