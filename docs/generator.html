@@ -39,11 +39,20 @@
                             </label>
                             <select v-model="type" v-on:change="renderPreview" class="uk-form-large uk-width-1-1" id="type">
                                 <option value="profile">Profile</option>
+                                <option value="ticker">Ticker</option>
                                 <option value="blog">Blog</option>
                                 <option value="feed">Feed</option>
                                 <option value="new">New</option>
                                 <option value="hot">Hot</option>
                                 <option value="trending">Trending</option>
+                            </select>
+                        </div>
+                        <div class="uk-width-1-2 uk-margin-bottom" v-if="type == 'ticker'">
+                            <label for="currency">
+                                Currency
+                            </label>
+                            <select v-model="currency" v-on:change="renderPreview" class="uk-form-large uk-width-1-1" id="currency">
+                                <option v-for="currency in currencies" :value="currency.id">{{ currency.name }} ({{ currency.symbol }})</option>
                             </select>
                         </div>
                         <div class="uk-width-1-2 uk-margin-bottom" v-if="type == 'profile' || type == 'blog' || type == 'feed'">
@@ -59,7 +68,7 @@
                             <input type="text" v-model="tag" v-on:change="renderPreview" class="uk-form-large uk-width-1-1" id="tag" autocomplete="off" />
                             <small style="color: #aaa;">Leave empty to show all {{ type }} posts.</small>
                         </div>
-                        <div v-bind:class="'uk-width-1-' + (template == 'default' ? '4' : '1')">
+                        <div v-if="type != 'ticker'" v-bind:class="'uk-width-1-' + (template == 'default' ? '4' : '1')">
                             <label for="template">
                                 Design
                             </label>
@@ -177,8 +186,105 @@
                             </div>
                         </div>
 
+                        <!-- Ticker -->
+                        <div class="uk-width-1-1 uk-margin-top" v-if="type == 'ticker'">
+                            <div class="uk-grid uk-grid-small">
+                                <div class="uk-width-1-3">
+                                    <label>
+                                        <input type="checkbox" v-model="showLogo" v-on:change="renderPreview" />
+                                        Logo
+                                    </label>
+                                </div>
+                                <div class="uk-width-1-3">
+                                    <label>
+                                        <input type="checkbox" v-model="showName" v-on:change="renderPreview" />
+                                        Name
+                                    </label>
+                                </div>
+                                <div class="uk-width-1-3">
+                                    <label>
+                                        <input type="checkbox" v-model="showRank" v-on:change="renderPreview" />
+                                        Rank
+                                    </label>
+                                </div>
+                                <div class="uk-width-1-3">
+                                    <label>
+                                        <input type="checkbox" v-model="showSymbol" v-on:change="renderPreview" />
+                                        Symbol
+                                    </label>
+                                </div>
+                                <div class="uk-width-1-3">
+                                    <label>
+                                        <input type="checkbox" v-model="show24HVolumne" v-on:change="renderPreview" />
+                                        24h Volume (USD)
+                                    </label>
+                                </div>
+                                <div class="uk-width-1-3">
+                                    <label>
+                                        <input type="checkbox" v-model="showAvailableSupply" v-on:change="renderPreview" />
+                                        Available supply
+                                    </label>
+                                </div>
+                                <div class="uk-width-1-3">
+                                    <label>
+                                        <input type="checkbox" v-model="showTotalSupply" v-on:change="renderPreview" />
+                                        Total supply
+                                    </label>
+                                </div>
+                                <div class="uk-width-1-3">
+                                    <label>
+                                        <input type="checkbox" v-model="showMarketCap" v-on:change="renderPreview" />
+                                        Market Cap (USD)
+                                    </label>
+                                </div>
+                                <div class="uk-width-1-3">
+                                    <label>
+                                        <input type="checkbox" v-model="showPercentChange1h" v-on:change="renderPreview" />
+                                        Percentage change (1h)
+                                    </label>
+                                </div>
+                                <div class="uk-width-1-3">
+                                    <label>
+                                        <input type="checkbox" v-model="showPercentChange24h" v-on:change="renderPreview" />
+                                        Percentage change (24h)
+                                    </label>
+                                </div>
+                                <div class="uk-width-1-3">
+                                    <label>
+                                        <input type="checkbox" v-model="showPercentChange7d" v-on:change="renderPreview" />
+                                        Percentage change (7d)
+                                    </label>
+                                </div>
+                                <div class="uk-width-1-3">
+                                    <label>
+                                        <input type="checkbox" v-model="showPriceBTC" v-on:change="renderPreview" />
+                                        Price (BTC)
+                                    </label>
+                                </div>
+                                <div class="uk-width-1-3">
+                                    <label>
+                                        <input type="checkbox" v-model="showPriceUSD" v-on:change="renderPreview" />
+                                        Price (USD)
+                                    </label>
+                                </div>
+                                <div class="uk-width-2-3"></div>
+                                <div class="uk-width-1-2 uk-margin-top">
+                                    <label>
+                                        USD price precision
+                                        <input type="number" v-model="priceUSDPrecision" v-on:change="renderPreview" min="0" max="10" autocomplete="off" size="2" />
+                                    </label>
+                                </div>
+                                <div class="uk-width-1-2 uk-margin-top">
+                                    <label>
+                                        BTC price precision
+                                        <input type="number" v-model="priceBTCPrecision" v-on:change="renderPreview" min="0" max="10" autocomplete="off" size="2" />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Blog/Feed/New/Hot/Trending -->
-                        <div class="uk-width-1-1 uk-margin-top" v-if="type != 'profile'">
+                        <div class="uk-width-1-1 uk-margin-top" v-if="type != 'profile' && type != 'ticker'">
                             <div class="uk-grid uk-grid-small">
                                 <div class="uk-width-1-3">
                                     <label>
@@ -378,6 +484,42 @@
                             </span>
                             Voting Power: ${VOTINGPOWER} %
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ticker -->
+        <div id="steemit-ticker-template-default" class="uk-hidden">
+            <div v-bind:style="'border: solid ' + border + 'px ' + color + '; border-radius: ' + borderRadius + 'px; font-family: Arial, Helvetica, sans-serif;'">
+                <div v-bind:style="'background-color: #fff; display: flex; border-top-right-radius: ' + Math.max(borderRadius - border, 0) + 'px; border-top-left-radius: ' + Math.max(borderRadius - border, 0) + 'px;'">
+                    <div v-if="showLogo" style="background: url(${IMAGE}) center center; background-size: cover; width: 50px; height: 50px; margin: 10px;"></div>
+                    <div style="flex: 1; margin: 10px; line-height: 18px; text-align: left;">
+                        <span v-if="showRank" v-bind:style="'background: ' + color + '; border-radius: 10px; color: #fff; font-size: 11px; padding: 2px 5px; font-weight: bold; border: solid 1px rgba(255,255,255,.5);'">#${RANK}</span>
+                        <a v-if="showName" href="https://coinmarketcap.com/currencies/${ID}" style="font-size: 17px; line-height: 27px; color: #666; text-decoration: none;">
+                            ${NAME}
+                            <span v-if="showSymbol">(${SYMBOL})</span>
+                        </a>
+                        <a v-if="!showName && showSymbol" href="https://coinmarketcap.com/currencies/${ID}" style="font-size: 17px; line-height: 27px; color: #666; text-decoration: none;">
+                            ${SYMBOL}
+                        </a>
+                        <span v-if="showPercentChange24h">${PERCENT_CHANGE_24H}</span>
+                        <br>
+                        <span v-if="showMarketCap" style="color: #666; font-size: 12px;">Market Cap: $ ${MARKET_CAP_USD}</span><br v-if="showMarketCap">
+                        <span v-if="show24HVolumne" style="color: #666; font-size: 12px;">24h Volume: $ ${24H_VOLUME_USD}</span><br v-if="show24HVolumne">
+                        <span v-if="showAvailableSupply" style="color: #666; font-size: 12px;">Avail. Supply: $ ${AVAILABLE_SUPPLY}</span><br v-if="showAvailableSupply">
+                        <span v-if="showTotalSupply" style="color: #666; font-size: 12px;">Total Supply: $ ${TOTAL_SUPPLY}</span>
+                    </div>
+                </div>
+                <div style="color: #787878; background: #fff;">
+                    <div v-if="showPriceUSD || showPriceBTC" style="display: table; table-layout: fixed; width: 100%; text-align: center; font-size: 18px; line-height: 21px; padding: 10px 0 5px;">
+                        <div v-if="showPriceUSD" style="display: table-cell;"><b>${PRICE_USD} USD</b></div>
+                        <div v-if="showPriceBTC" style="display: table-cell;"><b>${PRICE_BTC} BTC</b></div>
+                    </div>
+                    <div v-if="showPercentChange1h || showPercentChange24h || showPercentChange7d" style="display: table; table-layout: fixed; width: 100%; text-align: center; font-size: 12px; border-top: solid 1px #ddd; padding: 5px 0;">
+                        <div v-if="showPercentChange1h" style="display: table-cell;">1h: ${PERCENT_CHANGE_1H}</div>
+                        <div v-if="showPercentChange24h" style="display: table-cell;">24h ${PERCENT_CHANGE_24H}</div>
+                        <div v-if="showPercentChange7d" style="display: table-cell;">${PERCENT_CHANGE_7D}</div>
                     </div>
                 </div>
             </div>

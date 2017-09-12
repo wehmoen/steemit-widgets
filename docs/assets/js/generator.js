@@ -4,7 +4,25 @@ var generator = new Vue({
         type: 'profile',
         template: 'default',
         user: 'mkt',
+        tag: '',
+        currency: 'steem',
+        currencies: [],
         showAvatar: true,
+        showLogo: true,
+        showName: true,
+        showRank: true,
+        showSymbol: true,
+        show24HVolumne: true,
+        showAvailableSupply: false,
+        showTotalSupply: false,
+        showMarketCap: true,
+        showPercentChange1h: true,
+        showPercentChange24h: true,
+        showPercentChange7d: true,
+        showPriceBTC: true,
+        showPriceUSD: true,
+        priceBTCPrecision: 8,
+        priceUSDPrecision: 2,
         showUsername: true,
         showAuthor: true,
         showWebsite: true,
@@ -31,13 +49,17 @@ var generator = new Vue({
         border: 5,
         borderRadius: 5,
         color: '#00a8e6',
-        tag: '',
         limit: 10,
         updateInterval: 60,
         updateDelayTimeout: null,
         scriptSteemjs: '<script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>',
         scriptSteemitWidgets: '<script src="https://mktcode.github.io/steemit-widgets/assets/js/steemit-widgets.min.js"></script>',
         scriptMomentjs: '<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>'
+    },
+    created: function () {
+        $.getJSON('https://api.coinmarketcap.com/v1/ticker/', (currencies) => {
+            this.currencies = currencies;
+        });
     },
     mounted: function () {
         this.renderPreview();
@@ -61,6 +83,16 @@ var generator = new Vue({
                             preview.html('<div class="uk-text-center uk-text-danger">Username "' + this.user + '" not found.</div>');
                         }
                     }.bind(this));
+                    break;
+                case 'ticker':
+                    this.template = 'default';
+                    preview.steemitTicker({
+                        currency: this.currency,
+                        template: 'steemit-ticker-template-' + this.template,
+                        priceBTCPrecision: this.priceBTCPrecision,
+                        priceUSDPrecision: this.priceUSDPrecision,
+                        updateInterval: Math.max(this.updateInterval, 300)
+                    });
                     break;
                 case 'blog':
                     steem.api.getAccounts([this.user], function(err, accounts) {
@@ -165,6 +197,27 @@ var generator = new Vue({
                          + '    user: \'' + this.user + '\',' + nl
                          + '    reputationPrecision: ' + this.reputationPrecision + ',' + nl
                          + '    votingPowerPrecision: ' + this.votingPowerPrecision + ',' + nl
+                         + '    updateInterval: ' + this.updateInterval + nl
+                         + '  });' + nl
+                         + '&lt;/script&gt;'
+                    ;
+
+                    codeScriptsContainer.html('<pre><code class="html hljs xml">' + code + '</code></pre>');
+                    break;
+                case 'ticker':
+                    codeWidgetContainer.html('<pre><code class="html hljs xml">&lt;div id=&quot;steemit-widgets-ticker&quot;&gt;&lt;/div&gt;</code></pre>');
+
+                    var template = document.getElementById('steemit-ticker-template-' + this.template).innerHTML.replace(/&quot;/g, '\\\'').replace(/\n/g, '');
+
+                    code = this.encodeHTML(this.scriptSteemjs) + nl
+                         + this.encodeHTML(this.scriptSteemitWidgets) + nl
+                         + '&lt;script&gt;' + nl
+                         + '  steemitWidgets.ticker({' + nl
+                         + '    element: \'steemit-widgets-ticker\',' + nl
+                         + '    template: \'' + this.encodeHTML(template) + '\',' + nl
+                         + '    currency: \'' + this.currency + '\',' + nl
+                         + '    priceBTCPrecision: ' + this.priceBTCPrecision + ',' + nl
+                         + '    priceUSDPrecision: ' + this.priceUSDPrecision + ',' + nl
                          + '    updateInterval: ' + this.updateInterval + nl
                          + '  });' + nl
                          + '&lt;/script&gt;'
