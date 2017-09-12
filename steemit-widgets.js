@@ -379,8 +379,6 @@ steemitWidgets.ticker = function(options) {
                         var ticker = JSON.parse(xhr.responseText)[0],
                             html = '';
 
-                        console.log(ticker.last_updated, parseInt(ticker.last_updated));
-
                         var template = steemitWidgets.getTemplate(settings.template)
                             .replace(/\${ID}/g, ticker.id)
                             .replace(/\${NAME}/g, ticker.name)
