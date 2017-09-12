@@ -6,6 +6,8 @@
 
 ## How To Use
 
+The easiest way is to use the [generator](https://mktcode.github.io/steemit-widgets/generator.html). You can adjust a lot there but if you need an even more individual solution keep reading.
+
 First you need to decide where to put the content. You only need an empty element with an id somewhere on your website.
 
 ```html
@@ -112,7 +114,7 @@ template | Provides the HTML to display the profile. Can be either an HTML strin
 reputationPrecision | Sets the decimal precision for the reputation score. | Integer | 0
 votingPowerPrecision | Sets the decimal precision for the current voting power. | Integer | 2
 updateInterval | Sets the interval in seconds to update the output. Set to 0 to disable updates. | Integer | 60
-createdCallback | Sets a callback function to handle the created date display, for example with moment.js. | Function | `var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; created = new Date(created); return monthNames[created.getMonth()] + ' ' + created.getDate() + ', ' + created.getFullYear();`
+createdCallback | Sets a callback function to handle the created date display, for example with moment.js. | Function | `function (created) { monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; created = new Date(created); return monthNames[created.getMonth()] + ' ' + created.getDate() + ', ' + created.getFullYear(); }`
 
 #### Placeholders
 
@@ -130,6 +132,44 @@ ${FOLLOWERS} | Outputs the number of followers the user has.
 ${FOLLOWING} | Outputs the number of users the user is following.
 ${POSTCOUNT} | Outputs the users overall post count.
 ${ABOUT} | Outputs the users about text.
+
+### Currency Ticker
+
+Source: [coinmarketcap.com](https://coinmarketcap.com). (Updated every 5 minutes.)
+
+```javascript
+steemitWidgets.ticker(options);
+```
+
+#### Options
+
+Option | Description | Type | Default
+------ | ----------- | ---- | -------
+element | Sets the html id of the element in which to show the content. | String | null
+currency | Sets the currency. | String | `steem`
+template | Provides the HTML to display the ticker. Can be either an HTML string or the ID of a `<template>` tag. | String | `<h3>${NAME} <small>(${SYMBOL})</small></h3><p>USD: ${PRICE_USD}<br>BTC: ${PRICE_BTC}</p>`
+priceBTCPrecision | Sets the decimal precision for the BTC price. | Integer | 8
+priceUSDPrecision | Sets the decimal precision for the USD price. | Integer | 2
+updateInterval | Sets the interval in seconds to update the output. Set to 0 to disable updates. | Integer | 300
+
+#### Placeholders
+
+Placeholder | Description
+----------- | -----------
+${ID} | Outputs the ID.
+${NAME} | Outputs the name.
+${RANK} | Outputs the current rank.
+${SYMBOL} | Outputs the currency symbol.
+${IMAGE} | Outputs the url to an logo image.
+${24H_VOLUME_USD} | Outputs trading volume for the last 24 hours.
+${AVAILABLE_SUPPLY} | Outputs the available token supply.
+${TOTAL_SUPPLY} | Outputs the total token supply.
+${MARKET_CAP_USD} | Outputs the market cap in USD.
+${PERCENT_CHANGE_1H} | Outputs the price change percentage for the last hour in.
+${PERCENT_CHANGE_24H} | Outputs the price change percentage for the last 24 hours in.
+${PERCENT_CHANGE_7D} | Outputs the price change percentage for the last seven days in. 
+${PRICE_BTC} | Outputs the current BTC price.
+${PRICE_USD} | Outputs the current USD price.
 
 ### Blog and Feed
 
@@ -238,6 +278,7 @@ If your website uses jQuery you can use the built-in jQuery syntax.
 <script src="https://mktcode.github.io/steemit-widgets/assets/js/steemit-widgets.min.js"></script>
 <script>
   $('#my-profile').steemitProfile({user: 'your-username'});
+  $('#my-ticker').steemitTicker();
   $('#my-blog').steemitBlog({user: 'your-username'});
   $('#my-feed').steemitFeed({user: 'your-username'});
   $('#new-posts').steemitNew();

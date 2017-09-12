@@ -27,7 +27,8 @@ a:hover {
  * Demo
  */
 
-#steemit-profile {
+#steemit-profile,
+#steemit-ticker {
   border-radius: 6px;
   max-width: 360px;
   margin: 0 auto;
@@ -35,18 +36,20 @@ a:hover {
   border: solid 4px #4696e5;
 }
 
-#steemit-profile .uk-comment-header {
+#steemit-profile .uk-comment-header,
+#steemit-ticker .uk-comment-header {
   margin-bottom: 5px;
   border: none;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
 
-#steemit-profile .uk-comment-avatar {
+#steemit-profile .uk-comment-avatar,
+#steemit-ticker .uk-comment-avatar {
   width: 50px;
   height: 50px;
   background-position: center center;
-  background-size: cover; width: 50px; height: 50px;
+  background-size: cover;
 }
 
 #steemit-profile .uk-comment-title,
@@ -54,8 +57,30 @@ a:hover {
   color: #fff;
 }
 
-#steemit-profile .uk-comment-body {
+#steemit-ticker .uk-comment-title,
+#steemit-ticker .uk-comment-meta {
   color: #999;
+}
+
+#steemit-ticker .uk-comment-title small {
+  font-size: 12px;
+}
+
+#steemit-ticker .uk-comment-meta {
+  font-size: 13px;
+}
+
+#steemit-profile .uk-comment-body,
+#steemit-ticker .uk-comment-body {
+  color: #999;
+}
+
+#steemit-ticker .uk-comment-body {
+  border-top: solid 1px #ccc;
+}
+
+#steemit-ticker .uk-comment-body .uk-text-small {
+  font-size: 13px;
 }
 
 .steemit-post {

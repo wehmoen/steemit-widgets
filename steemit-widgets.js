@@ -349,6 +349,69 @@ steemitWidgets.trending = function(options) {
   }
 };
 
+// Ticker
+steemitWidgets.ticker = function(options) {
+    var settings = Object.assign({
+        element: null,
+        currency: 'steem',
+        template: '<h3>${NAME} <small>(${SYMBOL})</small></h3><p>USD: ${PRICE_USD}<br>BTC: ${PRICE_BTC}</p>',
+        priceBTCPrecision: 8,
+        priceUSDPrecision: 2,
+        updateInterval: 300 // coinmarketcap limit
+    }, options);
+
+    var element = settings.element instanceof Element ? settings.element : document.getElementById(settings.element);
+
+    if (element) {
+        run();
+        if (settings.updateInterval) {
+            steemitWidgets.updateIntervals.push(setInterval(run, settings.updateInterval * 1000));
+        }
+
+        function run() {
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://api.coinmarketcap.com/v1/ticker/' + settings.currency + '/', true);
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        var ticker = JSON.parse(xhr.responseText)[0],
+                            html = '';
+
+                        console.log(ticker.last_updated, parseInt(ticker.last_updated));
+
+                        var template = steemitWidgets.getTemplate(settings.template)
+                            .replace(/\${ID}/g, ticker.id)
+                            .replace(/\${NAME}/g, ticker.name)
+                            .replace(/\${RANK}/g, ticker.rank)
+                            .replace(/\${SYMBOL}/g, ticker.symbol)
+                            .replace(/\${IMAGE}/g, 'https://files.coinmarketcap.com/static/img/coins/64x64/' + ticker.id + '.png')
+                            .replace(/\${24H_VOLUME_USD}/g, parseFloat(ticker['24h_volume_usd']).toLocaleString(undefined, {minimumFractionDigits: 2}))
+                            .replace(/\${AVAILABLE_SUPPLY}/g, parseFloat(ticker.available_supply).toLocaleString(undefined, {minimumFractionDigits: 2}))
+                            .replace(/\${TOTAL_SUPPLY}/g, ticker.total_supply)
+                            .replace(/\${MARKET_CAP_USD}/g, parseFloat(ticker.market_cap_usd).toLocaleString())
+                            .replace(/\${PERCENT_CHANGE_1H}/g, steemitWidgets.getColoredPercentChange(ticker.percent_change_1h))
+                            .replace(/\${PERCENT_CHANGE_7D}/g, steemitWidgets.getColoredPercentChange(ticker.percent_change_7d))
+                            .replace(/\${PERCENT_CHANGE_24H}/g, steemitWidgets.getColoredPercentChange(ticker.percent_change_24h))
+                            .replace(/\${PRICE_BTC}/g, parseFloat(ticker.price_btc).toFixed(settings.priceBTCPrecision))
+                            .replace(/\${PRICE_USD}/g, parseFloat(ticker.price_usd).toFixed(settings.priceUSDPrecision));
+
+                        console.log(ticker);
+
+                        html += template;
+                        element.innerHTML = html;
+                    } else {
+                        element.innerHTML = 'Error: API not responding!';
+                    }
+                }
+            };
+        }
+    } else {
+        console.log('Element ' + settings.element + ' not found!');
+    }
+};
+
 /**
  * Helpers
  */
@@ -372,6 +435,20 @@ steemitWidgets.getPayout = function(post) {
   var curatorPayout = post.curator_payout_value.replace(' SBD', '');
 
   return parseFloat(authorPayout) + parseFloat(curatorPayout);
+}
+
+steemitWidgets.getColoredPercentChange = function(percentChange) {
+    if (percentChange > 0) {
+        percentChange = '+' + percentChange;
+    }
+
+    if (percentChange > 0) {
+        return '<span style="color: #090;">' + percentChange + ' %</span>';
+    } else if (percentChange < 0) {
+        return '<span style="color: #900;">' + percentChange + ' %</span>';
+    } else {
+        return percentChange + ' %';
+    }
 }
 
 steemitWidgets.calculateReputation = function(rep, precision) {
@@ -408,5 +485,8 @@ if (window.jQuery) {
   }
   jQuery.fn.steemitTrending = function(options) {
     steemitWidgets.trending(jQuery.extend({element: this[0]}, options));
+  }
+  jQuery.fn.steemitTicker = function(options) {
+    steemitWidgets.ticker(jQuery.extend({element: this[0]}, options));
   }
 }
