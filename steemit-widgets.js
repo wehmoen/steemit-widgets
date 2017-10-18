@@ -349,6 +349,60 @@ steemitWidgets.trending = function(options) {
   }
 };
 
+// Full Post
+steemitWidgets.fullPost = function(options) {
+  var settings = Object.assign({
+    element: null,
+    author: 'mkt',
+    permlink: 'steemline-beta-multifeed-ui-and-notifications-for-steemit',
+    template: '<div><a href="${URL}">${TITLE}</a><br>${Payout}, ${UPVOTES} Upvotes, ${COMMENTS} Comments<p>${BODY}</p></div>',
+    payoutPrecision: 2,
+    reputationPrecision: 0,
+    dateCallback: function (date) {
+        return date;
+    },
+    bodyCallback: function (body) {
+        return body;
+    },
+    tagsCallback: function (tags) {
+      var tagsHtml = '',
+          i;
+      for (i = 0; i < tags.length; i++) {
+          tagsHtml += '<a href="https://steemit.com/trending/' + tags[i] + '">' + tags[i] + '</a>';
+      }
+      return '<div class="steemit-full-post-tags">' + tagsHtml + '</div>';
+    }
+  }, options);
+
+  var element = settings.element instanceof Element ? settings.element : document.getElementById(settings.element);
+
+  if (element) {
+    steem.api.getContent(settings.author, settings.permlink, function(err, post) {
+      if (!err && post) {
+        var metaData = JSON.parse(post.json_metadata);
+        var template = steemitWidgets.getTemplate(settings.template)
+        .replace(/\${URL}/gi, 'https://steemit.com' + post.url)
+        .replace(/\${TITLE}/gi, post.title)
+        .replace(/\${AUTHOR}/gi, post.author)
+        .replace(/\${REPUTATION}/gi, steemitWidgets.calculateReputation(post.author_reputation, settings.reputationPrecision))
+        .replace(/\${DATE}/gi, settings.dateCallback(new Date(post.created)))
+        .replace(/\${BODY}/gi, settings.bodyCallback(post.body))
+        .replace(/\${PAYOUT}/gi, steemitWidgets.getPayout(post).toFixed(settings.payoutPrecision))
+        .replace(/\${COMMENTS}/gi, post.children)
+        .replace(/\${UPVOTES}/gi, post.net_votes)
+        .replace(/\${CATEGORY}/gi, post.category)
+        .replace(/\${TAGS}/gi, settings.tagsCallback(metaData.tags));
+
+        element.innerHTML = template;
+      } else {
+        element.innerHTML = 'Error: API not responding!';
+      }
+    });
+  } else {
+    console.log('Element ' + settings.element + ' not found!');
+  }
+};
+
 // Ticker
 steemitWidgets.ticker = function(options) {
     var settings = Object.assign({
@@ -466,23 +520,26 @@ steemitWidgets.calculateVotingPower = function(votingPower, lastVoteTime, precis
 if (window.jQuery) {
   jQuery.fn.steemitProfile = function(options) {
     steemitWidgets.profile(jQuery.extend({element: this[0]}, options));
-  }
+  };
   jQuery.fn.steemitBlog = function(options) {
     steemitWidgets.blog(jQuery.extend({element: this[0]}, options));
-  }
+  };
   jQuery.fn.steemitFeed = function(options) {
     steemitWidgets.feed(jQuery.extend({element: this[0]}, options));
-  }
+  };
   jQuery.fn.steemitNew = function(options) {
     steemitWidgets.new(jQuery.extend({element: this[0]}, options));
-  }
+  };
   jQuery.fn.steemitHot = function(options) {
     steemitWidgets.hot(jQuery.extend({element: this[0]}, options));
-  }
+  };
   jQuery.fn.steemitTrending = function(options) {
     steemitWidgets.trending(jQuery.extend({element: this[0]}, options));
-  }
+  };
+  jQuery.fn.steemitFullPost = function(options) {
+    steemitWidgets.fullPost(jQuery.extend({element: this[0]}, options));
+  };
   jQuery.fn.steemitTicker = function(options) {
     steemitWidgets.ticker(jQuery.extend({element: this[0]}, options));
-  }
+  };
 }

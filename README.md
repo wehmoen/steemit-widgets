@@ -247,6 +247,43 @@ ${COMMENTS} | Outputs the number of comments on the post.
 ${UPVOTES} | Outputs the number of upvotes the post has received.
 ${CATEGORY} | Outputs the post's category (first tag).
 
+### Full Post
+
+```javascript
+steemitWidgets.fullPost(options);
+```
+
+#### Options
+
+Option | Description | Type | Default
+------ | ----------- | ---- | -------
+element | Sets the html id of the element in which to show the content. | String | null
+author | Sets the tag for which to show posts. By default no tag is set and all posts will be shown. | String | null
+permlink | Sets the number of posts to show. | Integer | 10
+template | Provides the HTML to display the posts. Can be either an HTML string or the ID of a `<template>` tag. | String | `<div><a href="${URL}">${TITLE}</a><br>${Payout}, ${UPVOTES} Upvotes, ${COMMENTS} Comments<p>${BODY}</p></div>`
+payoutPrecision | Sets the decimal precision for the payout amount. | Integer | 2
+reputationPrecision | Sets the decimal precision for the reputation score. | Integer | 0
+dateCallback | Sets a callback function to handle the date display, for example with moment.js. | Function | `function (date) {return date;}`
+bodyCallback | Sets a callback function to handle the body display, for example with https://github.com/jonschlinkert/remarkable. | Integer | `function (body) {return body;}`
+tagsCallback | Sets a callback function to handle the tags display. | Integer | `function (tags) { let tagsHtml = '', i; for (i = 0; i < tags.length; i++) { tagsHtml += '<a href="https://steemit.com/trending/' + tags[i] + '">' + tags[i] + '</a>'; } return '<div class="steemit-full-post-tags">' + tagsHtml + '</div>'; }`
+
+
+#### Placeholders
+
+Placeholder | Description
+----------- | -----------
+${URL} | Outputs the post url.
+${TITLE} | Outputs the post's title.
+${AUTHOR} | Outputs the author's username.
+${DATE} | Outputs the post's creation date. Can be customized using the `dateCallback` option.
+${BODY} | Outputs the post's body.
+${PAYOUT} | Outputs the full pending or past payout amount.
+${REPUTATION} | Outputs the users reputation.
+${COMMENTS} | Outputs the number of comments on the post.
+${UPVOTES} | Outputs the number of upvotes the post has received.
+${CATEGORY} | Outputs the post's category (first tag).
+${TAGS} | Outputs the post's tags (link). Can be customized using the `tagsCallback` option.
+
 ## Formatting Post Dates
 
 If you want to format the post dates you can use the `dateCallback` option. Here is an example of how to display realtive times like "1 hour ago" like on steemit.com with [moment.js](https://momentjs.com).

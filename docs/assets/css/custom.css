@@ -119,3 +119,77 @@ a:hover {
 pre code {
   font-size: 15px;
 }
+
+#steemit-full-post {
+  padding: 25px;
+  border: solid 5px #4696e5;
+  border-radius: 5px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+#steemit-full-post br {
+  display: initial !important;
+}
+
+#steemit-full-post h1 * {
+  font-size: 26px;
+  font-weight: bold;
+}
+#steemit-full-post h2 * {
+  font-size: 23px;
+  font-weight: bold;
+}
+#steemit-full-post h3 * {
+  font-size: 20px;
+  font-weight: bold;
+}
+#steemit-full-post h4 * {
+  font-size: 18px;
+  font-weight: bold;
+}
+#steemit-full-post h5 * {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#steemit-full-post .uk-article-title a {
+  color: #666;
+}
+
+#steemit-full-post .uk-article-title a:hover {
+  color: #4696e5;
+}
+
+#steemit-full-post .steemit-full-post-tags > a {
+  background: #fff;
+  border: solid 1px #4696e5 !important;
+  padding: 0 5px;
+  color: #999;
+  display: inline-block;
+  margin-right: 5px;
+  border-radius: 15px;
+  font-size: 11px;
+  line-height: 20px;
+}
+
+#steemit-full-post .steemit-full-post-tags > a:hover {
+  text-decoration: none;
+}
+
+#steemit-full-post a {
+  color: #4696e5;
+}
+
+#steemit-full-post em {
+  color: #999;
+}
+
+#steemit-full-post .uk-badge {
+  background: #fff;
+  border: solid 1px #ccc;
+  color: #999;
+  font-size: 9px;
+  font-weight: normal;
+  padding: 0 3px;
+}
