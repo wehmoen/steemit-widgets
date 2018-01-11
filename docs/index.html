@@ -1164,6 +1164,8 @@ steemitWidgets.trending(options);</code></pre>
 <script src="https://mktcode.github.io/steemit-widgets/assets/js/steemit-widgets.min.js"></script>
 <script>
     $(function () {
+        steem.api.setOptions({ url: 'https://api.steemit.com' });
+      
         hljs.configure({style: 'github'});
         hljs.initHighlightingOnLoad();
 
