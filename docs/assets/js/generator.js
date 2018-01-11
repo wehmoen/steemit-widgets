@@ -1,3 +1,5 @@
+steem.api.setOptions({ url: 'https://api.steemit.com' });
+
 var generator = new Vue({
     el: '#generator',
     data: {
