@@ -1,3 +1,11 @@
+I know there miiighty be... an issue currently. This solves the issue:
+
+`<script src="https://mktcode.github.io/steemit-widgets/assets/js/steemit-widgets.min.js"></script>
+<script>
+  steem.api.setOptions({ url: 'https://api.steemit.com' }); // <-- ADD THIS
+  steemitWidgets.profile....
+  ....(`
+
 # Steemit Widgets
 
 **A simple way to display content from steemit.com on your website.**<br>by [mkt](http://steemit.com/@mkt)
