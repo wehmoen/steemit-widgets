@@ -14,7 +14,7 @@ steemitWidgets.profile = function(options) {
   var settings = Object.assign({
     element: null,
     user: 'mkt',
-    template: '<img width="100" src="${IMAGE}" /><br><a href="https://steemit.com/@${USER}">@${USER}</a>',
+    template: '<img width="100" src="${IMAGE}" /><br><a href="https://peakd.com/@${USER}">@${USER}</a>',
     reputationPrecision: 0,
     votingPowerPrecision: 2,
     updateInterval: 60,
@@ -100,7 +100,7 @@ steemitWidgets.blog = function(options) {
           for (var i = 0; i < posts.length; i++) {
             var metaData = JSON.parse(posts[i].json_metadata);
             var template = steemitWidgets.getTemplate(settings.template)
-              .replace(/\${URL}/gi, 'https://steemit.com' + posts[i].url)
+              .replace(/\${URL}/gi, 'https://peakd.com' + posts[i].url)
               .replace(/\${TITLE}/gi, posts[i].title)
               .replace(/\${AUTHOR}/gi, posts[i].author)
               .replace(/\${REPUTATION}/gi, steemitWidgets.calculateReputation(posts[i].author_reputation, settings.reputationPrecision))
@@ -158,7 +158,7 @@ steemitWidgets.feed = function(options) {
           for (var i = 0; i < posts.length; i++) {
             var metaData = JSON.parse(posts[i].json_metadata);
             var template = steemitWidgets.getTemplate(settings.template)
-            .replace(/\${URL}/gi, 'https://steemit.com' + posts[i].url)
+            .replace(/\${URL}/gi, 'https://peakd.com' + posts[i].url)
             .replace(/\${TITLE}/gi, posts[i].title)
             .replace(/\${AUTHOR}/gi, posts[i].author)
             .replace(/\${REPUTATION}/gi, steemitWidgets.calculateReputation(posts[i].author_reputation, settings.reputationPrecision))
@@ -215,7 +215,7 @@ steemitWidgets.new = function(options) {
           for (var i = 0; i < posts.length; i++) {
             var metaData = JSON.parse(posts[i].json_metadata);
             var template = steemitWidgets.getTemplate(settings.template)
-            .replace(/\${URL}/gi, 'https://steemit.com' + posts[i].url)
+            .replace(/\${URL}/gi, 'https://peakd.com' + posts[i].url)
             .replace(/\${TITLE}/gi, posts[i].title)
             .replace(/\${AUTHOR}/gi, posts[i].author)
             .replace(/\${REPUTATION}/gi, steemitWidgets.calculateReputation(posts[i].author_reputation, settings.reputationPrecision))
@@ -270,7 +270,7 @@ steemitWidgets.hot = function(options) {
           for (var i = 0; i < posts.length; i++) {
             var metaData = JSON.parse(posts[i].json_metadata);
             var template = steemitWidgets.getTemplate(settings.template)
-            .replace(/\${URL}/gi, 'https://steemit.com' + posts[i].url)
+            .replace(/\${URL}/gi, 'https://peakd.com' + posts[i].url)
             .replace(/\${TITLE}/gi, posts[i].title)
             .replace(/\${AUTHOR}/gi, posts[i].author)
             .replace(/\${REPUTATION}/gi, steemitWidgets.calculateReputation(posts[i].author_reputation, settings.reputationPrecision))
@@ -325,7 +325,7 @@ steemitWidgets.trending = function(options) {
           for (var i = 0; i < posts.length; i++) {
             var metaData = JSON.parse(posts[i].json_metadata);
             var template = steemitWidgets.getTemplate(settings.template)
-            .replace(/\${URL}/gi, 'https://steemit.com' + posts[i].url)
+            .replace(/\${URL}/gi, 'https://peakd.com' + posts[i].url)
             .replace(/\${TITLE}/gi, posts[i].title)
             .replace(/\${AUTHOR}/gi, posts[i].author)
             .replace(/\${REPUTATION}/gi, steemitWidgets.calculateReputation(posts[i].author_reputation, settings.reputationPrecision))
@@ -368,7 +368,7 @@ steemitWidgets.fullPost = function(options) {
       var tagsHtml = '',
           i;
       for (i = 0; i < tags.length; i++) {
-          tagsHtml += '<a href="https://steemit.com/trending/' + tags[i] + '">' + tags[i] + '</a>';
+          tagsHtml += '<a href="https://peakd.com/trending/' + tags[i] + '">' + tags[i] + '</a>';
       }
       return '<div class="steemit-full-post-tags">' + tagsHtml + '</div>';
     }
@@ -381,7 +381,7 @@ steemitWidgets.fullPost = function(options) {
       if (!err && post) {
         var metaData = JSON.parse(post.json_metadata);
         var template = steemitWidgets.getTemplate(settings.template)
-        .replace(/\${URL}/gi, 'https://steemit.com' + post.url)
+        .replace(/\${URL}/gi, 'https://peakd.com' + post.url)
         .replace(/\${TITLE}/gi, post.title)
         .replace(/\${AUTHOR}/gi, post.author)
         .replace(/\${REPUTATION}/gi, steemitWidgets.calculateReputation(post.author_reputation, settings.reputationPrecision))
